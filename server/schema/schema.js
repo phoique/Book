@@ -24,7 +24,8 @@ const BookType = new GraphQLObjectType({
     author: {
       type: AuthorType,
       resolve(parent, args) {
-        return _.find(Authors, {id: parent.author_id})
+        //return _.find(Authors, {id: parent.author_id});
+        return Author.findById(parent.author_id);
       }
     }
   })
@@ -39,7 +40,8 @@ const AuthorType = new GraphQLObjectType({
     books: {
       type: new GraphQLList(BookType),
       resolve(parent, args) {
-        return _.filter(Books, {author_id: parent.id});
+        //return _.filter(Books, {author_id: parent.id});
+        return Book.find({ author_id: parent.id });
       }
     }
   })
@@ -53,7 +55,8 @@ const RootQuery = new GraphQLObjectType({
       type: BookType,
       args: {id: { type: GraphQLID }},
       resolve(parent, args) {
-        return _.find(Books, {id: args.id});
+        //return _.find(Books, {id: args.id});
+        return Book.findById(args.id);
       }
     },
 
@@ -61,14 +64,21 @@ const RootQuery = new GraphQLObjectType({
       type: AuthorType,
       args: {id: { type: GraphQLID }},
       resolve(parent, args) {
-        return _.find(Authors, {id: args.id});
+        //return _.find(Authors, {id: args.id});
+        return Author.findById(args.id);
       }
     },
 
     books: {
       type: new GraphQLList(BookType),
       resolve(parent, args){
-        return Books;
+        return Book.find({});
+      }
+    },
+    authors: {
+      type: new GraphQLList(AuthorType),
+      resolve(parent, args){
+          return Author.find({});
       }
     }
 
@@ -92,6 +102,24 @@ const Mutation = new GraphQLObjectType({
 
         // Author added.
         return author.save();
+      }
+    },
+    addBook: {
+      type: BookType,
+      args: {
+        author_id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        genre: { type: GraphQLString }
+      },
+      resolve(parent, args) {
+        let book = new Book({
+          author_id: args.author_id,
+          name: args.name,
+          genre: args.genre
+        });
+
+        // Book added
+        return book.save();
       }
     }
   }
