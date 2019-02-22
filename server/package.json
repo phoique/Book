@@ -1,6 +1,6 @@
 {
-  "name": "book",
-  "version": "0.0.1",
+  "name": "book-api",
+  "version": "0.1.0",
   "description": "GraphQL Project",
   "main": "app.js",
   "scripts": {
