@@ -30,7 +30,7 @@ class AddBook extends Component {
           }
         </select>
         <br />
-        <input type="Submit" />
+        <input type="Submit"/>
       </div>
     )
   }
