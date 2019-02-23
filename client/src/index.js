@@ -6,7 +6,7 @@ import { ApolloProvider } from 'react-apollo';
 
 // Apollo client setup
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
+  uri: 'https://book-graphql.herokuapp.com/graphql'
 });
 
 ReactDOM.render(
