@@ -25,8 +25,12 @@ class AddBook extends Component {
         Yazar: 
         <select>
           {
-            loading ? "" : Object.keys(authors).map(author => 
-            <option key={author}>{(authors[author]).name}</option>)
+            loading 
+              ? 
+              "" 
+              : 
+              Object.keys(authors).map(author => 
+                <option key={author}>{(authors[author]).name}</option>)
           }
         </select>
         <br />
