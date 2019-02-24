@@ -29,7 +29,7 @@ class AddBook extends Component {
           Kitap türü: <input name="genre" type="text" onChange={this.handleChange} />
           <br />
           Yazar: 
-          <select onChange={(e) => console.log(e.target.value)} name="author_id">
+          <select onChange={this.handleChange} name="author_id">
             <option>Yazar seçin.</option>
             {
               loading 
@@ -37,7 +37,7 @@ class AddBook extends Component {
                 "" 
                 : 
                 Object.keys(authors).map(author => 
-                  <option key={author}>{(authors[author]).name}</option>)
+                  <option value={(authors[author]).id} key={author}>{(authors[author]).name}</option>)
             }
           </select>
           <br />
