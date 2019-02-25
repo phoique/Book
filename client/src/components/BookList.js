@@ -1,23 +1,40 @@
 import React, { Component } from 'react';
 import { getBooksQuery } from '../queries/queries';
 import { graphql } from 'react-apollo';
-import Book from './Book';
+import BookDetail from './BookDetail';
 
 class BookList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      book: {}
+    }
+  }
+
   render() {
     const { loading, books } = this.props.data;
+    const { book } = this.state;
     return (
       <div>
-        <ol>
+        <ol id="book-list">
           {
             loading ? 
               "Kitaplar yükleniyor..." 
               : 
               Object.keys(books)
               .map(book => 
-                <Book key={book} bookName={books[book]} />)
+                <li 
+                key={book} onClick={() => this.setState({ book: (books[book]) })}> 
+                {(books[book]).name} 
+                </li>)
           }
         </ol>
+        {
+          this.state.book.name ? 
+          <BookDetail book = { book }/>
+          : 
+          ""
+        }
       </div>
     )
   }

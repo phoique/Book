@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
-import { getAuthorsQuery } from '../queries/queries';
+import { graphql, compose } from 'react-apollo';
+import { getAuthorsQuery, addBookMutation, getBooksQuery } from '../queries/queries';
 
 class AddBook extends Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class AddBook extends Component {
       genre: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.saveBook = this.saveBook.bind(this);
   }
 
   handleChange(event) {
@@ -19,10 +20,21 @@ class AddBook extends Component {
     });
   }
 
+  saveBook() {
+    this.props.addBookMutation({
+      variables: {
+          author_id: this.state.author_id,
+          name: this.state.name,
+          genre: this.state.genre
+      },
+      refetchQueries: [{ query: getBooksQuery }]
+  });
+  }
+
   render() {
-    const { loading, authors } = this.props.data;
+    const { loading, authors } = this.props.getAuthorsQuery;
     return (
-      <div>
+      <div id="add-book">
         <form>
           Kitap ismi: <input name ="name" type="text" onChange={this.handleChange} />
           <br />
@@ -41,11 +53,14 @@ class AddBook extends Component {
             }
           </select>
           <br />
-          <input type="submit"/>
+          <input type="submit" onClick={this.saveBook}/>
         </form>
       </div>
     )
   }
 }
 
-export default graphql(getAuthorsQuery)(AddBook);
+export default compose(
+  graphql(getAuthorsQuery, { name: "getAuthorsQuery" }),
+  graphql(addBookMutation, { name: "addBookMutation" })
+)(AddBook);
