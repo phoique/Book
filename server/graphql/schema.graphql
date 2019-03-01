@@ -1,0 +1,5 @@
+# import Query from './types/book.graphql';
+# import Mutation from './types/book.graphql';
+
+# import Query from './types/author.graphql';
+# import Mutation from './types/author.graphql';

@@ -2,6 +2,9 @@ const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
 const cors = require('cors');
 
+// Graphql schema import tools.
+const { importSchema } = require('graphql-import');
+
 // dotenv
 const config = require('dotenv').config();
 
@@ -17,20 +20,14 @@ const app = express();
 // Cors 
 app.use(cors());
 
-const typeDefs = gql`
-
-  type Query {
-    message: String
-  }
-
-`;
-
 const resolvers = {
   Query: {
-    message: () => 'Apollo Server'
+    book: () => 'Apollo Server'
   }
 };
 
+// Graphql Schema
+const typeDefs = importSchema('./graphql/schema.graphql');
 
 // Apollo server
 const server = new ApolloServer({ typeDefs, resolvers });
