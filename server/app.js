@@ -1,5 +1,5 @@
 const express = require('express');
-const graphqlHTTP = require('express-graphql');
+const { ApolloServer, gql } = require('apollo-server-express');
 const cors = require('cors');
 
 // dotenv
@@ -17,11 +17,25 @@ const app = express();
 // Cors 
 app.use(cors());
 
-app.use('/graphql', graphqlHTTP({
-  graphiql: true,
-  schema
-}));
+const typeDefs = gql`
 
-app.listen(process.env.PORT, () => 
-  console.log(`Server start http://localhost:${process.env.PORT}`)
-);
+  type Query {
+    message: String
+  }
+
+`;
+
+const resolvers = {
+  Query: {
+    message: () => 'Apollo Server'
+  }
+};
+
+
+// Apollo server
+const server = new ApolloServer({ typeDefs, resolvers });
+
+server.applyMiddleware({ app });
+
+app.listen(4000, 
+  console.log(`http://localhost:${server.graphqlPath}`));
