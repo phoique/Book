@@ -1,9 +1,15 @@
 const express = require('express');
-const { ApolloServer, gql } = require('apollo-server-express');
 const cors = require('cors');
+
+// Apollo server.
+const { ApolloServer } = require('apollo-server-express');
 
 // Graphql schema import tools.
 const { importSchema } = require('graphql-import');
+
+// Graphql Schema and Resolvers
+const typeDefs = importSchema('./graphql/schema.graphql');
+const resolvers = require('./graphql/resolvers/resolvers');
 
 // dotenv
 const config = require('dotenv').config();
@@ -19,15 +25,6 @@ const app = express();
 
 // Cors 
 app.use(cors());
-
-const resolvers = {
-  Query: {
-    book: () => 'Apollo Server'
-  }
-};
-
-// Graphql Schema
-const typeDefs = importSchema('./graphql/schema.graphql');
 
 // Apollo server
 const server = new ApolloServer({ typeDefs, resolvers });
