@@ -2,6 +2,22 @@
   "name": "book-client",
   "version": "0.1.0",
   "private": true,
+  "description": "Apollo Client Project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phoique/Book.git"
+  },
+  "keywords": [
+    "React",
+    "Apollo",
+    "Apollo Client"
+  ],
+  "author": "Phoique",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Phoique/Book/issues"
+  },
+  "homepage": "https://github.com/Phoique/Book#readme",
   "dependencies": {
     "apollo-boost": "^0.1.28",
     "graphql": "^14.1.1",

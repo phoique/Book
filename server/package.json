@@ -1,19 +1,29 @@
 {
   "name": "book-api",
-  "version": "0.1.0",
-  "description": "GraphQL Project",
+  "version": "1.0.0",
+  "description": "GraphQL & Apollo Project",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "",
     "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phoique/Book.git"
   },
   "keywords": [
     "GraphQL",
     "Node",
-    "Express"
+    "Express",
+    "Apollo",
+    "Apollo Server"
   ],
   "author": "Phoique",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Phoique/Book/issues"
+  },
+  "homepage": "https://github.com/Phoique/Book#readme",
   "dependencies": {
     "apollo-server-express": "^2.4.8",
     "cors": "^2.8.5",
