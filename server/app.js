@@ -14,9 +14,6 @@ const resolvers = require('./graphql/resolvers/resolvers');
 // dotenv
 const config = require('dotenv').config();
 
-// Schema
-const schema = require('./schema/schema');
-
 // Datebase
 const datebase = require('./helper/datebase')();
 
