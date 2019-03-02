@@ -24,9 +24,15 @@ const app = express();
 app.use(cors());
 
 // Apollo server
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ 
+  typeDefs, 
+  resolvers,
+  introspection: true,
+  playground: true,  
+  });
 
 server.applyMiddleware({ app });
 
-// console.log(`http://localhost:/${process.env.PORT}${server.graphqlPath}`)
-app.listen(process.env.PORT);
+app.listen(process.env.PORT, () =>
+  console.log(`http://localhost:/${process.env.PORT}${server.graphqlPath}`)
+);
