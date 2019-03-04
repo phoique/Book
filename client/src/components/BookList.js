@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getBooksQuery } from '../queries/queries';
-import { graphql } from 'react-apollo';
+import { graphql, Query } from 'react-apollo';
 import BookDetail from './BookDetail';
 
 class BookList extends Component {
@@ -12,32 +12,48 @@ class BookList extends Component {
   }
 
   render() {
-    const { loading, books } = this.props.data;
+    console.log(this.props)
     const { book } = this.state;
     return (
-      <div>
-        <ol id="book-list">
-          {
-            loading ? 
-              "Kitaplar yükleniyor..." 
-              : 
-              Object.keys(books)
-              .map(book => 
-                <li 
-                key={book} onClick={() => this.setState({ book: (books[book]) })}> 
-                {(books[book]).name} 
-                </li>)
-          }
-        </ol>
+      <Query query = {getBooksQuery}>
         {
-          this.state.book.name ? 
-          <BookDetail book = { book }/>
-          : 
-          ""
+          ({ loading, data: {books}, error }) => 
+            <div>
+              <ol id="book-list">
+                {
+                  loading ? 
+                    "Kitaplar yükleniyor..." 
+                    : 
+                    Object.keys(books)
+                    .map(book => 
+                      <li 
+                      key = {book} onClick={() => this.setState({ book: (books[book]) })}> 
+                      {(books[book]).name} 
+                      </li>)
+                }
+              </ol>
+              {
+                this.state.book.name ? 
+                <BookDetail book = { book }/>
+                : 
+                ""
+              }
+            </div>
         }
-      </div>
-    )
+      </Query>
+    );
   }
 }
 
 export default graphql(getBooksQuery)(BookList);
+
+/*  
+
+Object.keys(books)
+                    .map(book => 
+                      <li 
+                       onClick={() => this.setState({ book: (books[book]) })}> 
+                      {(books[book])} 
+                      </li>)
+
+*/
