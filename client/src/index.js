@@ -21,7 +21,7 @@ const client = new ApolloClient({
       if (networkError) console.log(`[Network error]: ${networkError}`);
     }),
     new HttpLink({
-      uri: 'https://book-graphql.herokuapp.com/graphql',
+      uri: 'http://localhost:4000/graphql',
       credentials: 'same-origin'
     })
   ]),
