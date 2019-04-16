@@ -1,10 +1,10 @@
 import React from 'react';
 
-const BookDetail = (props) => {
+const BookDetail = ({name, genre}) => {
   return(
     <div id="book-details">
-     <h2>{ props.book.name }</h2>
-     <p>{ props.book.genre }</p>
+     <h2>{ name }</h2>
+     <p>{ genre }</p>
     </div>
   );
 }
