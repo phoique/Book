@@ -1,47 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getBooksQuery } from '../queries/queries';
-import { Query } from 'react-apollo';
-import BookDetail from './BookDetail';
+import { useQuery } from 'react-apollo-hooks';
 
-class BookList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      book: {}
-    }
-  }
+const Books = () => {
+  const { data, error, loading } = useQuery(getBooksQuery);
+  
+  if (loading) {
+    return <div>Kitaplar yükleniyor...</div>;
+  };
 
-  render() {
-    const { book } = this.state;
-    return (
-      <Query query = {getBooksQuery}>
-        {
-          ({ loading, data: {books}, error }) => 
-            <div>
-              <ol id="book-list">
-                {
-                  loading ? 
-                    "Kitaplar yükleniyor..." 
-                    : 
-                    
-                    books.map(book => 
-                      <li 
-                      key = {book.idc} onClick={() => this.setState({ book: book })}> 
-                      {book.name} 
-                      </li>)
-                }
-              </ol>
-              {
-                this.state.book.name ? 
-                <BookDetail book = { book }/>
-                : 
-                ""
-              }
-            </div>
-        }
-      </Query>
-    );
-  }
-}
+  if (error) {
+    return <div>Bir sorun oluştu: {error.message}</div>;
+  };
 
-export default BookList;
+  return (
+    <ol id="book-list">
+      {data.books.map(book => (
+        <li key={book.id}>{book.name}</li>
+      ))}
+    </ol>
+  );
+};
+
+export default Books;
