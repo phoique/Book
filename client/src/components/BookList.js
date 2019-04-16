@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getBooksQuery } from '../queries/queries';
-import { graphql, Query } from 'react-apollo';
+import { Query } from 'react-apollo';
 import BookDetail from './BookDetail';
 
 class BookList extends Component {
@@ -12,7 +12,6 @@ class BookList extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { book } = this.state;
     return (
       <Query query = {getBooksQuery}>
@@ -24,11 +23,11 @@ class BookList extends Component {
                   loading ? 
                     "Kitaplar yükleniyor..." 
                     : 
-                    Object.keys(books)
-                    .map(book => 
+                    
+                    books.map(book => 
                       <li 
-                      key = {book} onClick={() => this.setState({ book: (books[book]) })}> 
-                      {(books[book]).name} 
+                      key = {book.idc} onClick={() => this.setState({ book: book })}> 
+                      {book.name} 
                       </li>)
                 }
               </ol>
@@ -45,15 +44,4 @@ class BookList extends Component {
   }
 }
 
-export default graphql(getBooksQuery)(BookList);
-
-/*  
-
-Object.keys(books)
-                    .map(book => 
-                      <li 
-                       onClick={() => this.setState({ book: (books[book]) })}> 
-                      {(books[book])} 
-                      </li>)
-
-*/
+export default BookList;
