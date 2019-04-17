@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BookList from './pages/Books';
-import AddBook from './pages/AddBooks';
+import AddBooks from './pages/AddBooks';
 import './style.css';
 
 class App extends Component {
@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div id="main">
         <BookList />
-
+        <AddBooks />
       </div>
     );
   }

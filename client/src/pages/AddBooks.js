@@ -1,66 +1,46 @@
-import React, { Component } from 'react';
-import { graphql, compose } from 'react-apollo';
-import { getAuthorsQuery, addBookMutation, getBooksQuery } from '../queries/queries';
+import React, {useState} from 'react';
 
-class AddBook extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      author_id: '',
-      name: '',
-      genre: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.saveBook = this.saveBook.bind(this);
-  }
+const AddBooks = () => {
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
+  const [addBooks, setAddBooks] = useState({ name: '', genre: '', author_id: '' });
+
+  const handleChange = (event) => {
+    setAddBooks({
+      ...addBooks,
+      [event.target.name]: event.target.value, 
     });
   }
 
-  saveBook() {
-    this.props.addBookMutation({
-      variables: {
-          author_id: this.state.author_id,
-          name: this.state.name,
-          genre: this.state.genre
-      },
-      refetchQueries: [{ query: getBooksQuery }]
-  });
-  }
 
-  render() {
-    const { loading, authors } = this.props.getAuthorsQuery;
-    return (
-      <div id="add-book">
-        <form>
-          Kitap ismi: <input name ="name" type="text" onChange={this.handleChange} />
-          <br />
-          Kitap türü: <input name="genre" type="text" onChange={this.handleChange} />
-          <br />
-          Yazar: 
-          <select onChange={this.handleChange} name="author_id">
+  return (
+    <div id="add-book">
+      <p>
+        a {addBooks.name}
+      </p>
+      <p>
+      b {addBooks.genre}
+      </p>
+      <p>
+      c {addBooks.author_id}
+      </p>
+      
+      <form>
+        Kitap ismi: 
+          <input name ="name" type="text" onChange={handleChange}/>
+        <br />
+        Kitap türü: 
+          <input name="genre" type="text" onChange={handleChange}/>
+        <br />
+        Yazar: 
+          <select name="author_id" onChange={handleChange}>
             <option>Yazar seçin.</option>
-            {
-              loading 
-                ? 
-                "" 
-                : 
-                Object.keys(authors).map(author => 
-                  <option value={(authors[author]).id} key={author}>{(authors[author]).name}</option>)
-            }
+              <option value="deneme">deneme</option>)
           </select>
-          <br />
-          <input type="submit" onClick={this.saveBook}/>
-        </form>
-      </div>
-    )
-  }
+        <br />
+        <input type="submit"/>
+      </form>
+    </div>
+  );
 }
 
-export default compose(
-  graphql(getAuthorsQuery, { name: "getAuthorsQuery" }),
-  graphql(addBookMutation, { name: "addBookMutation" })
-)(AddBook);
+export default AddBooks;
