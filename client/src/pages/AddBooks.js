@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import Authorlist from '../components/AuthorList';
+import { useMutation } from 'react-apollo-hooks';
+import { addBookMutation } from '../queries/queries';
 
 const AddBooks = () => {
 
   const [addBooks, setAddBooks] = useState({ name: '', genre: '', author_id: '' });
+  const ADD_BOOKS = useMutation(addBookMutation);
 
   const handleChange = (event) => {
     setAddBooks({
@@ -12,6 +15,11 @@ const AddBooks = () => {
     });
   }
 
+  const saveBook = () => (
+    ADD_BOOKS({variables: {...addBooks}})
+  );
+
+  
   return (
     <div id="add-book">
       <form>
@@ -24,7 +32,7 @@ const AddBooks = () => {
         Yazar: 
           <Authorlist author={(author_id) => setAddBooks({...addBooks, author_id})}/>
         <br />
-        <input type="submit"/>
+        <input type="submit" onClick={saveBook}/>
       </form>
     </div>
   );
