@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Authorlist from '../components/AuthorList';
 
 const AddBooks = () => {
 
@@ -7,23 +8,12 @@ const AddBooks = () => {
   const handleChange = (event) => {
     setAddBooks({
       ...addBooks,
-      [event.target.name]: event.target.value, 
+      [event.target.name]: event.target.value,
     });
   }
 
-
   return (
     <div id="add-book">
-      <p>
-        a {addBooks.name}
-      </p>
-      <p>
-      b {addBooks.genre}
-      </p>
-      <p>
-      c {addBooks.author_id}
-      </p>
-      
       <form>
         Kitap ismi: 
           <input name ="name" type="text" onChange={handleChange}/>
@@ -32,10 +22,7 @@ const AddBooks = () => {
           <input name="genre" type="text" onChange={handleChange}/>
         <br />
         Yazar: 
-          <select name="author_id" onChange={handleChange}>
-            <option>Yazar seçin.</option>
-              <option value="deneme">deneme</option>)
-          </select>
+          <Authorlist author={(author_id) => setAddBooks({...addBooks, author_id})}/>
         <br />
         <input type="submit"/>
       </form>
