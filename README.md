@@ -24,9 +24,9 @@ DB_NAME = datebase_name
 $ npm start OR yarn start
 ```
 
-and go to  [localhost:PORT/graphql](http://localhost:4000/graphql)
+and go to  [localhost:4000/graphql](http://localhost:4000/graphql)
 
-## 2- React Client (React.js + Apollo )
+## 2- React Client (React.js + Apollo)
 
 Clone this repo and go to client folder.
 ```sh
