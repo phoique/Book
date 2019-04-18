@@ -2,7 +2,7 @@
 ## 1- GraphQL Server (Node.js + Apollo + GraphQL)
 
 Clone this repo and go to server folder.
-```
+```sh
 $ cd server
 
 $ npm install OR yarn install
@@ -26,10 +26,10 @@ $ npm start OR yarn start
 
 and go to  [localhost:PORT/graphql](http://localhost:4000/graphql)
 
-## 2- React Client
+## 2- React Client (React.js + Apollo )
 
 Clone this repo and go to client folder.
-```
+```sh
 $ cd client
 $ npm install OR yarn start
 
