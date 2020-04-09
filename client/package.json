@@ -31,7 +31,7 @@
     "react-apollo": "2.5.4",
     "react-apollo-hooks": "0.4.5",
     "react-dom": "16.8.6",
-    "react-scripts": "2.1.8"
+    "react-scripts": "3.4.1"
   },
   "scripts": {
     "start": "env-cmd .env react-scripts start",
